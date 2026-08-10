@@ -1,16 +1,40 @@
 import ScrollVideoHero from "@/components/ScrollVideoHero";
 import StatementSection from "@/components/StatementSection";
-import ExperienceSection from "@/components/ExperienceSection";
 import PainPointSection from "@/components/PainPointSection";
 import SceneGrid from "@/components/SceneGrid";
 import InteractiveHero from "@/components/InteractiveHero";
 
-const SPECS = [
-  { k: "Tracking", v: "240 Hz" },
-  { k: "Latency", v: "12 ms" },
-  { k: "Display", v: "듀얼 마이크로 OLED · 90 Hz" },
-  { k: "Controller", v: "패들형 · 6DoF" },
-  { k: "Session", v: "2.4 h" },
+const HARDWARE = [
+  {
+    name: "Glass",
+    tag: "XR Headset",
+    specs: [
+      { k: "크기", v: "190 × 180 × 110 mm" },
+      { k: "무게", v: "450g" },
+      { k: "디스플레이", v: "Micro-OLED" },
+      { k: "해상도", v: "2160 × 2160 px" },
+      { k: "주사율", v: "90 Hz" },
+      { k: "시야각", v: "100° FOV" },
+      { k: "트래킹", v: "6-DoF Inside-Out" },
+      { k: "핸드 트래킹", v: "Optical" },
+      { k: "연결 방식", v: "Wi-Fi 6E / Bluetooth 5.3" },
+      { k: "충전 타입", v: "USB Type-C" },
+      { k: "배터리", v: "3,000 mAh" },
+    ],
+  },
+  {
+    name: "Blade",
+    tag: "Paddle Controller",
+    specs: [
+      { k: "크기", v: "260 × 155 × 35 mm" },
+      { k: "무게", v: "180g" },
+      { k: "배터리", v: "800 mAh" },
+      { k: "연결 방식", v: "Bluetooth" },
+      { k: "충전 타입", v: "USB Type-C" },
+      { k: "모션 센서", v: "9-axis IMU" },
+      { k: "햅틱 액추에이터", v: "Dual LRA" },
+    ],
+  },
 ];
 
 
@@ -31,35 +55,45 @@ export default function Home() {
 
       <StatementSection />
 
-      <ExperienceSection />
-
       <PainPointSection />
 
       <InteractiveHero />
 
       <SceneGrid />
 
-      {/* spec table */}
+      {/* spec table — one hairline list per product */}
       <section className="border-t border-hairline-soft">
         <div className="mx-auto max-w-[1440px] px-6 py-28 md:py-40">
           <SectionLabel index="03" label="Specification" />
-          <div className="grid gap-10 md:grid-cols-12">
-            <h2 className="type-display text-[clamp(36px,5.5vw,72px)] md:col-span-5">
-              Hardware
-            </h2>
-            <ul className="border-t border-hairline-soft md:col-span-7">
-              {SPECS.map((spec) => (
-                <li
-                  key={spec.k}
-                  className="flex items-baseline justify-between gap-6 border-b border-hairline-soft py-5"
-                >
-                  <span className="text-[15px] text-mute">{spec.k}</span>
-                  <span className="tnum text-right text-[15px] text-ink">
-                    {spec.v}
+          <h2 className="type-display text-[clamp(36px,5.5vw,72px)]">
+            Hardware
+          </h2>
+          <div className="mt-16 grid gap-16 md:grid-cols-2 md:gap-x-20">
+            {HARDWARE.map((product) => (
+              <div key={product.name}>
+                <div className="mb-8 flex items-baseline justify-between gap-4 border-b border-hairline-soft pb-4">
+                  <h3 className="type-display text-[clamp(28px,3.4vw,42px)]">
+                    RALLY {product.name}
+                  </h3>
+                  <span className="type-eyebrow text-mute">
+                    {product.tag}
                   </span>
-                </li>
-              ))}
-            </ul>
+                </div>
+                <ul>
+                  {product.specs.map((spec) => (
+                    <li
+                      key={spec.k}
+                      className="flex items-baseline justify-between gap-6 border-b border-hairline-soft py-4"
+                    >
+                      <span className="text-[14px] text-mute">{spec.k}</span>
+                      <span className="tnum text-right text-[14px] text-ink">
+                        {spec.v}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
       </section>

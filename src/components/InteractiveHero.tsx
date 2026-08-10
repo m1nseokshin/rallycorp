@@ -70,8 +70,11 @@ export default function InteractiveHero() {
 
   const objectOpacity = Math.min(1, Math.max(0, (progress - 0.05) / 0.2));
 
-  // Logo & Title phase (55% ~ 90% scroll)
-  const logoProgress = Math.max(0, Math.min(1, (progress - 0.55) / 0.35));
+  // Logo phase — starts the instant the objects finish converging (slide
+  // phase ends at 0.15 + 0.5 = 0.65), with a quick pop-in rather than a slow
+  // fade that used to start before the merge actually finished.
+  const MERGE_END = 0.65;
+  const logoProgress = Math.max(0, Math.min(1, (progress - MERGE_END) / 0.08));
   const logoEased = 1 - Math.pow(1 - logoProgress, 3);
   const logoOpacity = logoEased * (1 - exitProgress);
   const logoY = (1 - logoEased) * 30;
