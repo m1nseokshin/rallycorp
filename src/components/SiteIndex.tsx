@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { asset } from "@/lib/asset";
 
 const SECTIONS = [
   { id: "intro", label: "Intro" },
@@ -43,7 +44,7 @@ export default function SiteIndex() {
       <a href="#intro" className="fixed left-6 top-6 z-50" aria-label="RALLY">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/media/hero-brand-logo.png"
+          src={asset("/media/rally-logo.svg")}
           alt="RALLY"
           className="h-[22px] w-auto object-contain"
           style={{ filter: "drop-shadow(0 1px 6px rgba(0,0,0,.6))" }}

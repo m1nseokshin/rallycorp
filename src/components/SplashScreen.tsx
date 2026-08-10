@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { asset } from "@/lib/asset";
 
 const HOLD_MS = 900; // symbol sits alone before handing over
 const FADE_MS = 700;
@@ -68,7 +69,7 @@ export default function SplashScreen() {
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src="/media/hero-brand-logo.png"
+        src={asset("/media/rally-logo.svg")}
         alt="RALLY"
         className="w-[200px] md:w-[280px] object-contain"
         style={{

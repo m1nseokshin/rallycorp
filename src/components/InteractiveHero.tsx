@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { asset } from "@/lib/asset";
 
 /**
  * Interactive Hero section:
@@ -36,10 +37,9 @@ export default function InteractiveHero() {
     };
   }, []);
 
-  // Background fade transition: Black -> White (0% ~ 25% scroll)
-  const bgFade = Math.min(1, progress / 0.25);
-
-  // Exit shrink transition: White -> Black/Canvas as user scrolls out (80% ~ 100%)
+  // Exit shrink transition: card recedes toward the canvas edges as the user
+  // scrolls out (80% ~ 100%). The background itself stays solid white
+  // throughout — it no longer fades in from black.
   const exitProgress = Math.max(0, Math.min(1, (progress - 0.8) / 0.2));
   
   // Scale: 0.88 -> 1.0 -> 0.88
@@ -86,19 +86,17 @@ export default function InteractiveHero() {
       data-section
       className="relative h-[450vh] bg-canvas border-t border-hairline-soft"
     >
-      <div 
-        className="sticky top-0 flex h-screen w-full flex-col items-center justify-center overflow-hidden transition-colors duration-200 px-6"
+      <div
+        className="sticky top-0 flex h-screen w-full flex-col items-center justify-center overflow-hidden bg-white px-6 text-[#0f172a]"
         style={{
-          backgroundColor: `rgb(${Math.round((1 - exitProgress) * (11 + bgFade * (255 - 11)))}, ${Math.round((1 - exitProgress) * (11 + bgFade * (255 - 11)))}, ${Math.round((1 - exitProgress) * (11 + bgFade * (255 - 11)))})`,
-          color: bgFade > 0.5 && exitProgress < 0.5 ? "#0f172a" : "#f8fafc",
           transform: `scale(${containerScale})`,
           borderRadius: `${cardRadius}px`,
         }}
       >
-        
-        {/* Top Header / Custom RALLY Logo */}
+
+        {/* Logo — centered over the stage, right where the two halves meet */}
         <div
-          className="pointer-events-none absolute top-12 md:top-20 z-20 flex flex-col items-center text-center"
+          className="pointer-events-none absolute inset-0 z-20 flex flex-col items-center justify-center text-center"
           style={{
             opacity: logoOpacity,
             transform: `translateY(${logoY}px)`,
@@ -106,9 +104,13 @@ export default function InteractiveHero() {
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/media/hero-brand-logo.png"
+            src={asset("/media/rally-wordmark-black.svg")}
             alt="RALLY"
-            className="h-14 md:h-24 w-auto object-contain rounded-sm"
+            className="h-14 md:h-24 w-auto object-contain"
+            /* The ® mark sits high and to the right of the wordmark, so the
+               viewBox's true center reads left of the wordmark's own visual
+               center. A small rightward nudge corrects it optically. */
+            style={{ transform: "translateX(1.5%)" }}
           />
         </div>
 
@@ -125,7 +127,7 @@ export default function InteractiveHero() {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/media/product/goggle-cutout.png"
+              src={asset("/media/product/goggle-cutout.png")}
               alt="Rally Goggle"
               className="w-full object-contain filter drop-shadow-2xl"
               style={{ imageRendering: "crisp-edges" }}
@@ -142,7 +144,7 @@ export default function InteractiveHero() {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/media/product/paddle-cutout.png"
+              src={asset("/media/product/paddle-cutout.png")}
               alt="Rally Paddle"
               className="w-full object-contain filter drop-shadow-2xl"
               style={{ imageRendering: "crisp-edges" }}
@@ -159,16 +161,8 @@ export default function InteractiveHero() {
             transition: "opacity 0.3s",
           }}
         >
-          <span className="type-eyebrow text-slate-400">Scroll to reveal</span>
+          <span className="type-eyebrow text-slate-500">Scroll to reveal</span>
           <div className="h-5 w-px bg-slate-400 animate-bounce" />
-        </div>
-
-        {/* Bottom progress bar */}
-        <div className="pointer-events-none absolute bottom-0 left-0 h-[2px] w-full bg-slate-200/20">
-          <div
-            className="h-full bg-primary"
-            style={{ width: `${progress * 100}%` }}
-          />
         </div>
 
       </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { asset } from "@/lib/asset";
 
 function reveal(p: number, at: number, span = 0.12) {
   return Math.min(1, Math.max(0, (p - at) / span));
@@ -89,7 +90,7 @@ export default function StatementSection() {
         >
           <video
             ref={videoRef}
-            src="/media/statement.mp4"
+            src={asset("/media/statement.mp4")}
             muted
             loop
             playsInline

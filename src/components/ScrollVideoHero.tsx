@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { asset } from "@/lib/asset";
 
 /**
  * Source clip: 8.926s @ 60fps (535 frames).
@@ -202,7 +203,7 @@ export default function ScrollVideoHero() {
         >
           <video
             ref={videoRef}
-            src="/media/rally-scrub.mp4"
+            src={asset("/media/rally-scrub.mp4")}
             muted
             playsInline
             preload="auto"
@@ -226,7 +227,7 @@ export default function ScrollVideoHero() {
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/media/hero-brand-logo.png"
+            src={asset("/media/rally-logo.svg")}
             alt="RALLY"
             className="w-[320px] sm:w-[420px] md:w-[560px] max-w-[85vw] object-contain"
           />
@@ -269,7 +270,7 @@ export default function ScrollVideoHero() {
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/media/hero-brand-logo.png"
+            src={asset("/media/rally-logo.svg")}
             alt="RALLY"
             className="w-[60vw] max-w-4xl object-contain"
             style={{ transform: `scale(${0.92 + logoIn * 0.08})` }}

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import ScrollVideoHero from "@/components/ScrollVideoHero";
 import StatementSection from "@/components/StatementSection";
 import PainPointSection from "@/components/PainPointSection";
@@ -104,13 +105,13 @@ export default function Home() {
           <h2 className="type-display text-[clamp(44px,10vw,150px)]">
             Keep the rally
           </h2>
-          <a
+          <Link
             href="/app"
             className="hover-grow mt-12 inline-flex h-14 items-center bg-ink px-10 text-[16px] font-semibold text-canvas transition-all"
             style={{ borderRadius: "var(--radius-lg)" }}
           >
             Rally 앱 시작하기 →
-          </a>
+          </Link>
         </div>
       </section>
 

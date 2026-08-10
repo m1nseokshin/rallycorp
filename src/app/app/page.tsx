@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { asset } from "@/lib/asset";
 
 export const metadata: Metadata = {
   title: "RALLY App — 시작하기",
@@ -14,9 +16,9 @@ export default function AppLaunchPage() {
       
       {/* Header link back to home */}
       <nav className="absolute top-8 left-8">
-        <a href="/" className="type-eyebrow text-neutral-400 hover:text-white transition-colors flex items-center gap-2">
+        <Link href="/" className="type-eyebrow text-neutral-400 hover:text-white transition-colors flex items-center gap-2">
           ← 랜딩 페이지로 돌아가기
-        </a>
+        </Link>
       </nav>
 
       {/* Main launch card */}
@@ -25,7 +27,7 @@ export default function AppLaunchPage() {
         {/* RALLY Logo */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/media/hero-brand-logo.png"
+          src={asset("/media/rally-logo.svg")}
           alt="RALLY"
           className="h-16 md:h-20 w-auto object-contain mb-8 rounded-sm filter drop-shadow-md"
         />
