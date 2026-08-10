@@ -1,0 +1,169 @@
+/* Pretendard has to be imported BEFORE Tailwind. `@import "tailwindcss"` is
+   inlined in place, so anything after it lands ~511 lines deep — past the point
+   where CSS still allows an @import, and PostCSS rejects the file. */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+@import "tailwindcss";
+
+/*
+ * Rally design system, web variant.
+ * Palette and type tiers follow the Rally presentation signature
+ * (black / white / surface / muted, Bebas Neue display, single orange accent).
+ * Neutral scale and pill geometry come from the Nike layer.
+ */
+:root {
+  --color-canvas: #0a0a0a;
+  --color-surface: #141414;
+  --color-surface-2: #1c1c1c;
+  --color-ink: #ffffff;
+  --color-charcoal: #d8d8d8;
+  --color-ash: #b6b6b6;
+  --color-mute: #92928f;
+  --color-stone: #6b6b6b;
+  --color-hairline: #3a3a3a;
+  --color-hairline-soft: #262626;
+
+  --color-primary: #f24822;
+  --color-primary-deep: #c9330f;
+  --color-primary-soft: #ffe9e3;
+  --color-on-primary: #ffffff;
+
+  --radius-sm: 15px;
+  --radius-md: 20px;
+  --radius-lg: 30px;
+  /* Panel scale bumped well past the app's 4/6/8 — on a wide dark page the
+     tighter values read as square, and the media plates carry the roundness. */
+  --radius-input: 8px;
+  --radius-card: 18px;
+  --radius-panel: 24px;
+
+  --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+  --gutter: 24px;
+}
+
+@theme inline {
+  --color-canvas: var(--color-canvas);
+  --color-surface: var(--color-surface);
+  --color-surface-2: var(--color-surface-2);
+  --color-ink: var(--color-ink);
+  --color-charcoal: var(--color-charcoal);
+  --color-ash: var(--color-ash);
+  --color-mute: var(--color-mute);
+  --color-stone: var(--color-stone);
+  --color-hairline: var(--color-hairline);
+  --color-hairline-soft: var(--color-hairline-soft);
+  --color-primary: var(--color-primary);
+  --color-primary-deep: var(--color-primary-deep);
+  --font-display: var(--font-bebas);
+  --font-sans:
+    "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
+    system-ui, sans-serif;
+}
+
+html {
+  background: var(--color-canvas);
+}
+
+body {
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Korean sets break on word boundaries, never mid-syllable. */
+h1,
+h2,
+h3,
+p,
+li {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+/* Latin display tier — Bebas Neue, tight tracking, uppercase. */
+.type-display {
+  font-family: var(--font-bebas), var(--font-sans);
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+}
+
+/* Korean headline tier — Bebas has no Hangul glyphs, so Pretendard 900 carries it. */
+.type-headline {
+  font-family: var(--font-sans);
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+}
+
+.type-eyebrow {
+  font-family: var(--font-bebas), var(--font-sans);
+  font-size: 12px;
+  line-height: 1.4;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.type-caption {
+  font-size: 12px;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+.hover-grow {
+  transition: transform 180ms var(--ease-standard);
+}
+@media (hover: hover) {
+  .hover-grow:hover {
+    transform: scale(1.04);
+  }
+}
+
+.rise {
+  transition:
+    opacity 500ms var(--ease-standard),
+    transform 500ms var(--ease-standard);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise,
+  .hover-grow {
+    transition: none;
+  }
+}
+
+@keyframes symbol-in {
+  from {
+    opacity: 0;
+    transform: scale(0.86);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes symbol-meta-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [style*="symbol-in"],
+  [style*="symbol-meta-in"] {
+    animation: none !important;
+  }
+}
