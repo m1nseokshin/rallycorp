@@ -4,6 +4,7 @@ import StatementSection from "@/components/StatementSection";
 import PainPointSection from "@/components/PainPointSection";
 import SceneGrid from "@/components/SceneGrid";
 import InteractiveHero from "@/components/InteractiveHero";
+import BrandFilmSection from "@/components/BrandFilmSection";
 
 const HARDWARE = [
   {
@@ -98,6 +99,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <BrandFilmSection />
 
       {/* closing */}
       <section className="border-t border-hairline-soft">

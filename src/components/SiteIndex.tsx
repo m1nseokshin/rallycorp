@@ -9,6 +9,7 @@ const SECTIONS = [
   { id: "painpoint", label: "Approach" },
   { id: "product-intro", label: "Product" },
   { id: "scene", label: "In use" },
+  { id: "film", label: "Film" },
 ] as const;
 
 export default function SiteIndex() {
