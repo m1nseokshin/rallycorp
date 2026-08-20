@@ -286,14 +286,6 @@ export default function ScrollVideoHero() {
         >
           <span className="type-eyebrow text-white/60">Scroll</span>
         </div>
-
-        {/* scrub rail */}
-        <div className="pointer-events-none absolute bottom-0 left-0 h-px w-full bg-white/15">
-          <div
-            className="h-full bg-primary"
-            style={{ width: `${progress * 100}%` }}
-          />
-        </div>
       </div>
     </div>
   );

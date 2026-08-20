@@ -58,8 +58,21 @@ export default function SceneGrid() {
           />
 
           <div className="flex flex-col gap-6 md:col-span-7">
-            <Frame src={SCENES[1]} className="flex-1" ratio="h-full min-h-[200px]" />
-            <Frame src={SCENES[2]} className="flex-1" ratio="h-full min-h-[200px]" />
+            {/* md:h-full stretches these to match the portrait leader's height
+                once the row is wide enough to sit side by side; below that
+                the flex column has no height to stretch into, so each frame
+                falls back to its own aspect ratio instead of an arbitrary
+                min-height. */}
+            <Frame
+              src={SCENES[1]}
+              className="flex-1"
+              ratio="aspect-[4/3] md:aspect-auto md:h-full"
+            />
+            <Frame
+              src={SCENES[2]}
+              className="flex-1"
+              ratio="aspect-[4/3] md:aspect-auto md:h-full"
+            />
           </div>
 
           <Frame
